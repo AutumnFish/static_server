@@ -27,6 +27,12 @@ http.createServer((request,response)=>{
     // console.log('你来啦');
 
     // 获取用户需要获取的文件->路径
+    if (path.normalize(decodeURI(request.url)) !== decodeURI(request.url)) {
+        response.statusCode = 403;
+        response.end();
+        return;
+    }
+
     let reqUrl = request.url;
     // console.log(reqUrl);
     let pathFile = path.join(rootPath,reqUrl);
